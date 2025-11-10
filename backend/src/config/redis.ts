@@ -22,7 +22,7 @@ export const getRedisClient = () => {
 
     redisClient.on('error', (err) => {
       // Only log once to avoid spam
-      if (err.code === 'ECONNREFUSED') {
+      if ('code' in err && err.code === 'ECONNREFUSED') {
         console.warn('⚠️  Redis not available, continuing without cache');
         redisClient = null;
       } else {
